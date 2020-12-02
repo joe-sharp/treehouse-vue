@@ -6,7 +6,7 @@ _site
 .sass-cache
 .jekyll-metadata
 .jekyll-cache
-# _includes/scripts.html
+_includes/scripts.html
 
 # Vagrant
 .vagrant
