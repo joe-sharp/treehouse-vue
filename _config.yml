@@ -15,11 +15,21 @@
 # in the templates via {{ site.myvariable }}.
 title: Treehouse Vue by Joe Sharp
 short_title: Treehouse Vue
-email: your-email@example.com
+email: joesharp13@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   A widget, written in Vue.js, that will display Treehouse points on the web
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# colors:
+frontend: '#3659A2'
+design: '#4A4290'
+backend: '#008297'
+mobile: '#30826C'
+fundamentals: '#9B3B5A'
+data: '#9F4B84'
+experimental: '#733A88'
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
