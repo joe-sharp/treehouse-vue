@@ -19,7 +19,7 @@
 <script>
 export default {
   name: 'Chart',
-  props: ['sitename'],
+  props: ['sitename', 'frontend', 'design', 'backend', 'mobile', 'fundamentals', 'data', 'experimental'],
   data: function () {
     return {
       profile: {},
@@ -27,22 +27,22 @@ export default {
       total: 0,
       legend: [],
       categories: {
-        frontend: 0,
-        design: 0,
-        backend: 0,
-        mobile: 0,
+        frontend:     0,
+        design:       0,
+        backend:      0,
+        mobile:       0,
         fundamentals: 0,
-        data: 0,
+        data:         0,
         experimental: 0
       },
       color: {
-        frontend: '#3659A2',
-        design: '#4A4290',
-        backend: '#008297',
-        mobile: '#30826C',
-        fundamentals: '#9B3B5A',
-        data: '#9F4B84',
-        experimental: '#733A88'
+        frontend:     this.frontend,
+        design:       this.design,
+        backend:      this.backend,
+        mobile:       this.mobile,
+        fundamentals: this.fundamentals,
+        data:         this.data,
+        experimental: this.experimental
       }
     }
   },
@@ -89,24 +89,20 @@ export default {
         showLabel: false
       });
     },
-    colorizePie() {
-      this.$el.querySelector('.ct-series-a .ct-slice-donut-solid').style.fill = this.color.frontend
-      this.$el.querySelector('.ct-series-b .ct-slice-donut-solid').style.fill = this.color.design
-      this.$el.querySelector('.ct-series-c .ct-slice-donut-solid').style.fill = this.color.backend
-      this.$el.querySelector('.ct-series-d .ct-slice-donut-solid').style.fill = this.color.mobile
-      this.$el.querySelector('.ct-series-e .ct-slice-donut-solid').style.fill = this.color.fundamentals
-      this.$el.querySelector('.ct-series-f .ct-slice-donut-solid').style.fill = this.color.data
-      this.$el.querySelector('.ct-series-g .ct-slice-donut-solid').style.fill = this.color.experimental
+    colorizeChart() {
+      this.setDocStyle('--frontend', this.frontend)
+      this.setDocStyle('--design', this.design)
+      this.setDocStyle('--backend', this.backend)
+      this.setDocStyle('--mobile', this.mobile)
+      this.setDocStyle('--fundamentals', this.fundamentals)
+      this.setDocStyle('--data', this.data)
+      this.setDocStyle('--experimental', this.experimental)
     },
-    sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+    setDocStyle(prop, val) {
+      document.documentElement.style.setProperty(prop, val)
     }
   },
-  /**
-   * [Main]
-   */
   created: async function () {
-    // fetch('https://teamtreehouse.com/joesharp.json').then(response => response.json()).then(data => this.points = data.points)
     const response = await fetch('https://teamtreehouse.com/joesharp.json');
     const data = await response.json();
     const points = data.points;
@@ -128,29 +124,32 @@ export default {
 
     const categories = Object.values(this.categories)
     this.createChart(categories);
-    await this.sleep(1); /* This works somehow. Awaiting createChart does not. */
-    this.colorizePie();
+    this.colorizeChart();
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro&display=swap');
-  // properties
   $color-background: #f9f9f9;
   $color-primary: #222222;
+  :root {
+    --frontend: #000;
+    --design: #000;
+    --backend: #000;
+    --mobile: #000;
+    --fundamentals: #000;
+    --data: #000;
+    --experimental: #000;
+  }
 
-  // resets
   * {
     padding: 0;
     margin: 0;
     color: $color-primary;
   }
-
-  // clearfix
   .group:after {content:"";display:table;clear:both;}
 
-  // general
   ::marker {
     display: none!important;
   }
@@ -175,7 +174,7 @@ export default {
       }
     }
   }
-  // legend
+
   .vue-legend {
     width: 13em;
     padding-left: 1em;
@@ -201,4 +200,12 @@ export default {
       font-weight: bold;
     }
   }
+
+  .ct-series-a .ct-slice-donut-solid{ fill: var(--frontend); }
+  .ct-series-b .ct-slice-donut-solid{ fill: var(--design); }
+  .ct-series-c .ct-slice-donut-solid{ fill: var(--backend); }
+  .ct-series-d .ct-slice-donut-solid{ fill: var(--mobile); }
+  .ct-series-e .ct-slice-donut-solid{ fill: var(--fundamentals); }
+  .ct-series-f .ct-slice-donut-solid{ fill: var(--data); }
+  .ct-series-g .ct-slice-donut-solid{ fill: var(--experimental); }
 </style>
