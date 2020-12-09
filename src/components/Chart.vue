@@ -7,7 +7,7 @@
     <div class="vue-pie"></div>
     <div class="vue-legend">
       <ul>
-        <li v-for="skill in legend" v-key="skill.id" :style="{ 'border-color': getColor(skill.id)}">
+        <li v-for="skill in legend" v-bind:key="skill.id" :style="{ 'border-color': getColor(skill.id)}">
           <em>{{ skill.id }}</em><span>{{ skill.value }}</span>
         </li>
       </ul>
@@ -57,7 +57,7 @@ export default {
       return Object.values(ary).sort((a, b) => a - b ).reverse();
     },
     determineCategory(skill) {
-      const check = skill.toLowerCase()
+      const check        = skill.toLowerCase()
       const frontend     = ['css', 'html', 'javascript']
       const design       = ['design']
       const backend      = ['apis', 'c#', 'java', 'php', 'python', 'ruby']
@@ -88,17 +88,30 @@ export default {
         startAngle: 0,
         showLabel: false
       });
+    },
+    colorizePie() {
+      this.$el.querySelector('.ct-series-a .ct-slice-donut-solid').style.fill = this.color.frontend
+      this.$el.querySelector('.ct-series-b .ct-slice-donut-solid').style.fill = this.color.design
+      this.$el.querySelector('.ct-series-c .ct-slice-donut-solid').style.fill = this.color.backend
+      this.$el.querySelector('.ct-series-d .ct-slice-donut-solid').style.fill = this.color.mobile
+      this.$el.querySelector('.ct-series-e .ct-slice-donut-solid').style.fill = this.color.fundamentals
+      this.$el.querySelector('.ct-series-f .ct-slice-donut-solid').style.fill = this.color.data
+      this.$el.querySelector('.ct-series-g .ct-slice-donut-solid').style.fill = this.color.experimental
+    },
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
   },
   /**
    * [Main]
    */
-  async created() {
+  created: async function () {
     // fetch('https://teamtreehouse.com/joesharp.json').then(response => response.json()).then(data => this.points = data.points)
     const response = await fetch('https://teamtreehouse.com/joesharp.json');
     const data = await response.json();
     const points = data.points;
     this.profile = data;
+    this.total = points.total;
 
     this.filterZeros(points).slice(1).forEach((key) => {
       this.points[key] = points[key]
@@ -115,14 +128,14 @@ export default {
 
     const categories = Object.values(this.categories)
     this.createChart(categories);
-
-    this.total = points.total;
+    await this.sleep(1); /* This works somehow. Awaiting createChart does not. */
+    this.colorizePie();
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+  @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro&display=swap');
   // properties
   $color-background: #f9f9f9;
   $color-primary: #222222;
@@ -144,9 +157,9 @@ export default {
   .vue-pieChart {
     display: flex;
   }
-  body {
-    font-family: "Open Sans", Arial;
-    background: $color-background;
+  div {
+    font-family: 'Source Code Pro', monospace;
+    background: none;
 
     a {
       text-decoration: none;
@@ -180,6 +193,7 @@ export default {
       border-left: 1.25em solid black;
     }
     em {
+      font-family: 'Source Sans Pro', sans-serif;
       font-style: normal;
     }
     span {
