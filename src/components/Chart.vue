@@ -22,6 +22,7 @@ export default {
   props: ['sitename', 'frontend', 'design', 'backend', 'mobile', 'fundamentals', 'data', 'experimental'],
   data: function () {
     return {
+      avatar: '',
       profile: {},
       points: {},
       total: 0,
@@ -108,6 +109,7 @@ export default {
     const points = data.points;
     this.profile = data;
     this.total = points.total;
+    this.avatar = data.gravatar_url;
 
     this.filterZeros(points).slice(1).forEach((key) => {
       this.points[key] = points[key]
