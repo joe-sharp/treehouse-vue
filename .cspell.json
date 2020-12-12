@@ -1,0 +1,21 @@
+{
+    "version": 0.1,
+    "language": "en",
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/**",
+        ".vscode",
+        "report",
+        ".github/**",
+        "Gemfile",
+        "Vagrantfile",
+        "package-lock.json",
+        "webpack.config.babel.js"
+    ],
+    "words": [
+        "sitename",
+        "treehouse",
+        "Treehouse"
+    ]
+}
