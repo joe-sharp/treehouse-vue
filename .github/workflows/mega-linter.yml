@@ -51,6 +51,7 @@ jobs:
           DISABLE_LINTERS: JAVSCRIPT_STANDARD
           APPLY_FIXES: all
           HTML_HTMLHINT_ARGUMENTS: --ignore '**/_site/**'
+          SPELL_CSPELL_ARGUMENTS: -v
 
       # Upload Mega-Linter artifacts
       - name: Archive production artifacts
