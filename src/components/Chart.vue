@@ -80,7 +80,7 @@ export default {
       return this.color[this.determineCategory(skill)]
     },
     createChart(categories) {
-      new Chartist.Pie('.vue-pie', {
+      Chartist.Pie('.vue-pie', {
         series: categories
       }, {
         donut: true,
