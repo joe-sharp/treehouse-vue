@@ -8,12 +8,13 @@
         "standard"
     ],
     "parserOptions": {
-        "ecmaVersion": 12,
+        "ecmaVersion": 2019,
         "sourceType": "module"
     },
     "plugins": [
         "vue"
     ],
     "rules": {
+      "no-unused-vars": [2, {"args": "after-used", "varsIgnorePattern": "^_"}]
     }
 }
