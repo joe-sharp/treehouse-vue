@@ -18,14 +18,16 @@
 
 <script>
 export default {
-  name: 'Chart',
+  name:  'Chart',
   props: ['sitename', 'frontend', 'design', 'backend', 'mobile', 'fundamentals', 'data', 'experimental'],
-  data: function () {
+  data:  function () {
     return {
+      avatar:  '',
       profile: {},
-      points: {},
-      total: 0,
-      legend: [],
+      points:  {},
+      total:   0,
+      legend:  [],
+
       categories: {
         frontend:     0,
         design:       0,
@@ -47,16 +49,16 @@ export default {
     }
   },
   methods: {
-    filterZeros(hsh) {
+    filterZeros (hsh) {
       return Object.keys(hsh).filter(key => hsh[key] > 0)
     },
-    getKeyByValue(object, value) {
-      return Object.keys(object).find(key => object[key] === value);
+    getKeyByValue (object, value) {
+      return Object.keys(object).find(key => object[key] === value)
     },
-    descNumericSort(ary) {
-      return Object.values(ary).sort((a, b) => a - b ).reverse();
+    descNumericSort (ary) {
+      return Object.values(ary).sort((a, b) => a - b).reverse()
     },
-    determineCategory(skill) {
+    determineCategory (skill) {
       const check        = skill.toLowerCase()
       const frontend     = ['css', 'html', 'javascript']
       const design       = ['design']
@@ -66,30 +68,30 @@ export default {
       const data         = ['data analysis', 'databases']
       const experimental = ['equity, diversity, and inclusion (edi)', 'go', 'machine learning']
       switch (true) {
-        case frontend.includes(check):     return 'frontend';
-        case design.includes(check):       return 'design';
-        case backend.includes(check):      return 'backend';
-        case mobile.includes(check):       return 'mobile';
-        case fundamentals.includes(check): return 'fundamentals';
-        case data.includes(check):         return 'data';
-        case experimental.includes(check): return 'experimental';
+        case frontend.includes(check):     return 'frontend'
+        case design.includes(check):       return 'design'
+        case backend.includes(check):      return 'backend'
+        case mobile.includes(check):       return 'mobile'
+        case fundamentals.includes(check): return 'fundamentals'
+        case data.includes(check):         return 'data'
+        case experimental.includes(check): return 'experimental'
       }
     },
-    getColor(skill) {
+    getColor (skill) {
       return this.color[this.determineCategory(skill)]
     },
-    createChart(categories) {
-      new Chartist.Pie('.vue-pie', {
+    createChart (categories) {
+      Chartist.Pie('.vue-pie', {          // eslint-disable-line no-undef
         series: categories
       }, {
-        donut: true,
+        donut:      true,
         donutWidth: 20,
         donutSolid: true,
         startAngle: 0,
-        showLabel: false
-      });
+        showLabel:  false
+      })
     },
-    colorizeChart() {
+    colorizeChart () {
       this.setDocStyle('--frontend', this.frontend)
       this.setDocStyle('--design', this.design)
       this.setDocStyle('--backend', this.backend)
@@ -98,33 +100,34 @@ export default {
       this.setDocStyle('--data', this.data)
       this.setDocStyle('--experimental', this.experimental)
     },
-    setDocStyle(prop, val) {
+    setDocStyle (prop, val) {
       document.documentElement.style.setProperty(prop, val)
     }
   },
   created: async function () {
-    const response = await fetch('https://teamtreehouse.com/joesharp.json');
-    const data = await response.json();
-    const points = data.points;
-    this.profile = data;
-    this.total = points.total;
+    const response = await fetch('https://teamtreehouse.com/joesharp.json')
+    const data = await response.json()
+    const points = data.points
+    this.profile = data
+    this.total = points.total
+    this.avatar = data.gravatar_url
 
     this.filterZeros(points).slice(1).forEach((key) => {
       this.points[key] = points[key]
-    });
+    })
 
-    const points_desc = Object.values(this.points).sort((a, b) => a - b).reverse();
-    points_desc.forEach((value) => {
-      let key = this.getKeyByValue(this.points, value)
-      let skill = { id: key, value: value }
-      this.legend.push(skill);
+    const pointsDesc = Object.values(this.points).sort((a, b) => a - b).reverse()
+    pointsDesc.forEach((value) => {
+      const key = this.getKeyByValue(this.points, value)
+      const skill = { id: key, value: value }
+      this.legend.push(skill)
 
       this.categories[this.determineCategory(key)] += value
     })
 
     const categories = Object.values(this.categories)
-    this.createChart(categories);
-    this.colorizeChart();
+    this.createChart(categories)
+    this.colorizeChart()
   }
 }
 </script>

@@ -3,7 +3,7 @@ import Chart from './components/Chart'
 
 Vue.component('chart', Chart)
 
-new Vue({
+const _ = new Vue({
   el: '#app',
   data: {}
 })
