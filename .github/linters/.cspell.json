@@ -21,6 +21,7 @@
         "Treehouse",
         "editorconfig",
         "eslintignore",
-        "tagname"
+        "tagname",
+        "HTMLHINT"
     ]
 }
