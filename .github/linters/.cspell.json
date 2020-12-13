@@ -20,6 +20,7 @@
         "treehouse",
         "Treehouse",
         "editorconfig",
-        "eslintignore"
+        "eslintignore",
+        "tagname"
     ]
 }

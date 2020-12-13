@@ -1,10 +1,10 @@
 module.exports = {
-  'server': '_site',
-  'files': '_site',
-  'serveStatic': [
+  server: '_site',
+  files: '_site',
+  serveStatic: [
     '_site'
   ],
-  'serveStaticOptions': {
-    'extensions': ['html']
+  serveStaticOptions: {
+    extensions: ['html']
   }
 }
