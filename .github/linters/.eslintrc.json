@@ -15,6 +15,8 @@
         "vue"
     ],
     "rules": {
-      "no-unused-vars": [2, {"args": "after-used", "varsIgnorePattern": "^_"}]
+      "no-unused-vars": [2, {"args": "after-used", "varsIgnorePattern": "^_"}],
+      "key-spacing": [2, {"align": {"beforeColon": false, "afterColon": true, "on": "value", "mode": "minimum"}}],
+      "no-multi-spaces": [2, {"ignoreEOLComments": true, "exceptions": {"VariableDeclarator": true, "SwitchCase": true}}]
     }
 }
