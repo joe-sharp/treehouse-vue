@@ -48,6 +48,8 @@ jobs:
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
           # DISABLE: COPYPASTE,SPELL # Uncomment to disable copy-paste and spell checks
           DEFAULT_BRANCH: main
+          DISABLE_LINTERS: JAVSCRIPT_STANDARD
+          APPLY_FIXES: all
           HTML_HTMLHINT_ARGUMENTS: --ignore '**/_site/**'
 
       # Upload Mega-Linter artifacts

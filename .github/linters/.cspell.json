@@ -8,7 +8,7 @@
         "**/.git/**",
         ".vscode",
         "report",
-        "**/.github/**",
+        ".**/**",
         "Gemfile**",
         "Vagrantfile",
         "package-lock.json",
