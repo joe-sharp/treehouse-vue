@@ -5,48 +5,48 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './src/main.js',
+  entry:  './src/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path:     path.resolve(__dirname, './dist'),
     filename: '[name].[chunkhash].js'
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: 'initial',
-          test: path.resolve(__dirname, 'node_modules'),
-          name: 'vendor',
+          chunks:  'initial',
+          test:    path.resolve(__dirname, 'node_modules'),
+          name:    'vendor',
           enforce: true
         }
       }
     }
   },
-  mode: 'development',
+  mode:   'development',
   module: {
     rules: [
       {
-        test: /\.vue$/,
+        test:   /\.vue$/,
         loader: 'vue-loader'
       },
       {
         test: /\.css$/,
-        use: [
+        use:  [
           'vue-style-loader',
           'css-loader'
         ]
       },
       {
         test: /\.scss$/,
-        use: [
+        use:  [
           'vue-style-loader',
           'css-loader',
           'sass-loader'
         ]
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        test:    /\.js$/,
+        loader:  'babel-loader',
         exclude: file => (
           /node_modules/.test(file) &&
           !/\.vue\.js/.test(file)
