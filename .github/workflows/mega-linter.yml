@@ -35,6 +35,7 @@ jobs:
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+          submodules: true
 
       # Mega-Linter
       - name: Mega-Linter
