@@ -4,6 +4,6 @@ import Chart from './components/Chart'
 Vue.component('chart', Chart)
 
 const _ = new Vue({
-  el: '#app',
+  el:   '#app',
   data: {}
 })

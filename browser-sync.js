@@ -1,6 +1,6 @@
 module.exports = {
-  server: '_site',
-  files: '_site',
+  server:      '_site',
+  files:       '_site',
   serveStatic: [
     '_site'
   ],
